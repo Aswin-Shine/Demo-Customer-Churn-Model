@@ -47,12 +47,12 @@ jobs:
 
       - name: Push model to S3 directly
         run: |
-          aws s3 cp models/churn_model.pkl s3://churn-model-bucket-ash-0407/models-cicd/
+          aws s3 cp models/churn_model.pkl s3://churn-model-ash-0407/models-cicd/
           echo "Model pushed to S3 is success"
 
       - name: Update inference.yaml with S3 model path
         run: |
-          MODEL_URI="s3://churn-model-bucket-ash-0407/models-cicd/"
+          MODEL_URI="s3://churn-model-ash-0407/models-cicd/"
           sed -i "s|storageUri: .*|storageUri: $MODEL_URI|g" k8s/inference.yaml
 
       - name: Commit updated inference.yaml
